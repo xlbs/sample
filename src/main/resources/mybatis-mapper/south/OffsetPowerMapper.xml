@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+      alarm_zc_device_status_info模块对应的数据库访问配置文件
+	  since 2015-12-24 15:34
+	  author autogen
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.bjtct.base.dao.OffsetPowerMapper">  
+
+	<select id="getStationInfoByDeviceNo" parameterType="String" resultType="java.util.Map">
+		SELECT d.device_name,s.station_no,s.station_name FROM
+		(SELECT * FROM dic_device WHERE device_no = #{0} )d
+		LEFT JOIN dic_station s ON
+		d.station_no = s.station_no  
+	</select>
+</mapper>
