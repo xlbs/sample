@@ -9,20 +9,18 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.huayun.sample.common.DataSourceConstants;
 
 @Configuration
+//扫描base dao接口包名
 @MapperScan(basePackages = DataSourceConstants.SOUTH_SCAN_PACKAGE, sqlSessionFactoryRef = DataSourceConstants.SOUTH_SESSION_FACTORY)
 public class SouthSQLDataSource {
-	//扫描base dao接口包名
-	 
+
     @Value("${south.datasource.url}")
     private String dbUrl;
     @Value("${south.datasource.username}")

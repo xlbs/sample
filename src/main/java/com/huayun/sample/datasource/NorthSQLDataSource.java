@@ -14,13 +14,12 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.huayun.sample.common.DataSourceConstants;
 
 @Configuration
+//扫描base dao接口包名
 @MapperScan(basePackages = DataSourceConstants.NORTH_SCAN_PACKAGE, sqlSessionFactoryRef = DataSourceConstants.NORTH_SESSION_FACTORY)
 public class NorthSQLDataSource {
-	//扫描base dao接口包名
-	 
+
     @Value("${north.datasource.url}")
     private String dbUrl;
     @Value("${north.datasource.username}")
@@ -40,13 +39,13 @@ public class NorthSQLDataSource {
     }
 
     @Bean(name =DataSourceConstants.NORTH_TX_MG)
-    @Primary
+    @Primary //必须指定一个默认数据源（主数据源）
     public DataSourceTransactionManager initFtpTransactionManager(@Qualifier(DataSourceConstants.NORTH_DATA_SOURCE) DataSource northDataSource) {
         return new DataSourceTransactionManager(northDataSource);
     }
 
     @Bean(name = DataSourceConstants.NORTH_SESSION_FACTORY)
-    @Primary
+    @Primary //必须指定一个默认数据源（主数据源）
     public SqlSessionFactory initMmsSessionFactory(@Qualifier(DataSourceConstants.NORTH_DATA_SOURCE) DataSource northDataSource) throws Exception {
         final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(northDataSource);

@@ -7,10 +7,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.huayun.sample.north.dao.TestMapper">  
+<mapper namespace="com.huayun.sample.dao.south.SouthTestMapper">
 
-	<select id="getDepartments" resultType="java.util.Map">
-		SELECT AutoID,DepartmentName 
-		FROM Departments
+	<select id="getTestSouthData" resultType="java.util.Map">
+		SELECT *
+		FROM H20171201
 	</select>
+
+
 </mapper>

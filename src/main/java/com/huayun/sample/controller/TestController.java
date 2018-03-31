@@ -1,30 +1,34 @@
-package com.huayun.sample.rest;
+package com.huayun.sample.controller;
 
+import com.huayun.sample.service.south.intf.I_SouthTestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.huayun.sample.north.service.TestService;
+import com.huayun.sample.service.north.intf.I_NorthTestService;
 
 @Controller
 @RequestMapping("/test")
 public class TestController {
 	
 	@Autowired
-	private TestService testService;
+	private I_NorthTestService northTestService;
+
+	@Autowired
+	private I_SouthTestService southTestService;
 	
-	@RequestMapping("/queryTest")
+	@RequestMapping("/northData")
 	@ResponseBody
-	public Object test(@RequestParam(value="deviceNo") String deviceNo){
-		return testService.getStationInfoByDeviceNo(deviceNo);
+	public Object northDataTest(){
+		return northTestService.getTestNorthData();
 	}
-	
-	@RequestMapping("/dbSearch")
+
+	@RequestMapping("/southData")
 	@ResponseBody
-	public Object test(){
-		return testService.getDepartments();
+	public Object southDataTest(){
+		return southTestService.getTestSouthData();
 	}
 	
 	@RequestMapping("/helloword")
